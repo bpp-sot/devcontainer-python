@@ -1,0 +1,25 @@
+{
+    "name": "BPP School of Technology Development Container",
+    "image": "mcr.microsoft.com/devcontainers/base:debian",
+    "features": {
+        "ghcr.io/devcontainers/features/java:1": {
+            "javaVersion": "17",
+            "maven": "true",
+            "gradle": "true"
+        },
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "lts"
+        },
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {},
+            "extensions": [
+                "bierner.github-markdown-preview"
+            ]
+        }
+    }
+}
