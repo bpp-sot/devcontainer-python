@@ -1,4 +1,4 @@
-name: Build and Publish Devcontainer
+name: Build and Publish Multi-arch Devcontainer
 
 on:
   push:
@@ -20,6 +20,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
       - name: Log in to the Container registry
         uses: docker/login-action@v2
         with:
@@ -27,10 +33,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
       - name: Build and push Dev Container image
         uses: devcontainers/ci@v0.3
         with:
           imageName: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          platform: linux/amd64,linux/arm64
           push: always
 
       - name: Image digest
