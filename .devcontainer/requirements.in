@@ -1,0 +1,17 @@
+# Core development tools
+black
+flake8
+pylint
+mypy
+pytest
+pytest-cov
+isort
+
+# Common libraries
+requests
+pandas
+numpy
+pyyaml
+
+# Add additional base dependencies below
+matplotlib
